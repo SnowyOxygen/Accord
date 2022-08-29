@@ -48,7 +48,7 @@ DARK SLATE GRAY: #394F49
 p#mercureTitre{
   font-size: 3em;
   color: #D3C8C5;
-  margin-bottom: 1em;
+  margin-bottom: 0.25em;
 }
 
 html,body{
@@ -65,39 +65,6 @@ a, p{
   color: #DFF8EB;
   padding-bottom: 2em;
 }
-
-/* #region Login */
-nav, div#login{
-  display: flex;
-  flex-direction: column;
-}
-#login{
-  max-width: 20vh;
-  margin:auto;
-}
-input#username, input#password{
-  margin-bottom: 4vh;
-  border: 2px solid #394F49;
-  background-color: #DFF8EB;
-  color: #394F49;
-  font-size: 1.1em;
-  font-weight: 550;
-  font-style: italic;
-  text-align: center;
-  box-shadow: black 2px 2px 2px;
-}
-input#submitlogin{
-  border: 2px solid #394F49;
-  background-color: #120D31;
-  color: #D3C8C5;
-
-  font-size: 1.2em;
-  font-weight: 600;
-  text-align: center;
-
-  box-shadow: black 2px 2px 2px;
-}
-/* #endregion */
 
 @media screen and (max-width: 540px) {
   div#appWrapper{

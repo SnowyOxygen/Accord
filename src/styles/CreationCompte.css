@@ -1,0 +1,11 @@
+header#ccheader{
+    padding: 0;
+    margin-top: 10vh;
+    min-height: 0;
+    overflow-y: hidden;
+}
+p#ccmercure{
+    font-size: 3em;
+    color: #D3C8C5;
+    margin-bottom: 0.25em;
+}
