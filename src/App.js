@@ -1,18 +1,25 @@
-import logo from './logo.svg';
+import React from 'react';
+import { useState } from 'react';
 import './App.css';
-import { Link, Route, Router, Routes } from 'react-router-dom';
-import { Login } from './pages/Login.js';
-import { Home } from './pages/Home.js';
-import { CreationCompte } from './pages/CreationCompte.js';
+
+//Components
+import Home from "./components/Home";
+import ChatBox from './components/ChatBox';
 
 function App() {
+  const [email, setEmail] = useState('');
+  //TODO: Rendre password illisible dans console
+  const [password, setPassword] = useState('');
+
   return (
     <div id="appWrapper" className="App">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/create_account" element={<CreationCompte />} />
-      </Routes>
+      {(email === "" || password === "") ? (
+        <Home setEmail={setEmail}
+              setPassword={setPassword}/>
+      ) : (
+        <ChatBox email={email}
+                 password={setPassword}/>
+      )}
     </div>
   );
 }
