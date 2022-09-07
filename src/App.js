@@ -17,7 +17,8 @@ function App() {
         <Home setEmail={setEmail}
               setPassword={setPassword}/>
       ) : (
-        <ChatBox/>
+        <ChatBox email={email}
+                 password={setPassword}/>
       )}
     </div>
   );

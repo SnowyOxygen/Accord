@@ -6,6 +6,7 @@ import Signup from "./Signup";
 
 function Home({setEmail, setPassword}){
     const [hasAccount, setHasAccount] = useState(true);
+    //TODO: check cookies for login details with component
 
     return (
         <div>
@@ -20,7 +21,8 @@ function Home({setEmail, setPassword}){
                   setPassword={setPassword}
                   setHasAccount={setHasAccount} />
             ) : (
-                <Signup/>
+                <Signup
+                  setHasAccount={setHasAccount}/>
             )}
 
         </div>
