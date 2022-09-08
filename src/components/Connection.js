@@ -15,7 +15,7 @@ function Connection({setHasAccount, setEmail, setPassword}){
             setEmail(tempEmail);
             setPassword(tempPass);
         }
-    }
+    } 
 
     const toggleWarning = (warning, toggle) => {
         if(toggle){
@@ -85,9 +85,9 @@ function Connection({setHasAccount, setEmail, setPassword}){
                 <button onClick={() => checkDetails()}>Se connecter</button>
                 {
                     warningsList.length > 0 ? (
-                        warningsList.map((warning) => {
+                        warningsList.map((warning, index) => {
                             return (
-                                <p className="warning">{warning}</p>
+                                <p className="warning" key={index}>{warning}</p>
                             )
                         })
                     ) : (

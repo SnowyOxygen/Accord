@@ -5,11 +5,14 @@ CORNFLOWER BLUE: #6F9CEB
 PALE SILVER: #D3C8C5
 DARK SLATE GRAY: #394F49
 */
-
 body, html{
   background-color: #120D31;
   font-family: monospace;
+
+  height: 100%;
 }
+
+/* Connection */
 
 .title{
   font-size: 2em;
@@ -36,4 +39,71 @@ input.invalid{
 }
 p.warning{
   color: red;
+}
+
+/* Chatbox */
+header.chatbox-header{
+  height: 7vh;
+  background-color: #6F9CEB;
+  box-shadow: 2px 2px 2px 2px #120D31;
+  position: relative;
+}
+p.welcome{
+  color: #D3C8C5;
+  text-shadow: #394F49 1px 1px;
+  font-size: 1.5em;
+  margin-block-start: 0px;
+
+  vertical-align: middle;
+}
+
+div.chatbox-horizontal{
+  display: flex;
+  flex-direction: row;
+}
+
+div.groups-wrapper{
+  background-color: #6F9CEB;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  flex-grow: 1;
+}
+ul.groups-list{
+  list-style: none;
+  padding-inline-start: 0px;
+}
+li.group-element{
+  margin: 10px;
+}
+button.group-button{
+  width: 33px;
+  height: 33px;
+  background-color: #D3C8C5;
+
+  color: #394F49;
+  font-weight: bolder;
+  font-size: 1.3em;
+
+  border: 2px solid #394F49;
+  border-radius: 25px;
+}
+button.group-button:hover{
+  background-color: #394F49;
+  color: #D3C8C5;
+  border: 2px solid #D3C8C5;
+}
+
+div.rooms-wrapper{
+  background-color: #6F9CEB;
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  flex-grow: 1;
 }
