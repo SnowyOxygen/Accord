@@ -9,21 +9,22 @@ function Home({setEmail, setPassword}){
     //TODO: check cookies for login details with component
 
     return (
-        <div>
+        <div className="home">
 
             <header className="title">
                 {`\u0394ccord`}
             </header>
-
-            {hasAccount ? (
-                <Connection
-                  setEmail={setEmail}
-                  setPassword={setPassword}
-                  setHasAccount={setHasAccount} />
-            ) : (
-                <Signup
-                  setHasAccount={setHasAccount}/>
-            )}
+            <div className="accounts">
+                {hasAccount ? (
+                    <Connection
+                    setEmail={setEmail}
+                    setPassword={setPassword}
+                    setHasAccount={setHasAccount} />
+                ) : (
+                    <Signup
+                    setHasAccount={setHasAccount}/>
+                )}
+            </div>
 
         </div>
     )
