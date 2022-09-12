@@ -19,7 +19,7 @@ function ChatBox({email, password}){
 
             <div className="chatbox-horizontal">
                 <Groups group={group} setGroup={setGroup} setRooms={setRooms} setRoom={setRoom}/>
-                <Rooms rooms={rooms} setRoom={setRoom}/>
+                <Rooms group={group} rooms={rooms} setRoom={setRoom}/>
                 <Content room={room}/>
             </div>
         </div>

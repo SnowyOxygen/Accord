@@ -30,7 +30,8 @@ function Content({room}){
                     </ul>
                 </div>
                 <div className="textbox">
-                    <input onChange={(event) => setMessage(event.target.value)} type="text" className="chatinput" maxLength="300"/>
+                    <input onChange={(event) => setMessage(event.target.value)} type="text" className="chatinput" maxLength="100"/>
+                    <input className="image-upload" type="image"/>
                     <button onClick={() => sendMessage()} className="chatsubmit">{`\u2709`}</button>
                 </div>
             </div>

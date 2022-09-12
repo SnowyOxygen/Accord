@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 
-function Rooms({rooms, setRoom}){
+function Rooms({rooms, group, setRoom}){
     useEffect(() => {
         setRoom({})
     }, [rooms])
@@ -9,6 +9,11 @@ function Rooms({rooms, setRoom}){
 
     return(
         <div className="rooms-wrapper">
+            <p className="rooms-groupname">{Object.keys(group).length > 0 ? (
+                <p className="group-name">{group.name}</p>
+            ) : (
+                <p className="group-name">Veuillez choisir un groupe.</p>
+            )}</p>
             <ul className="rooms-list">
                 {Object.entries(rooms).map((el, i) => {
                     return(
