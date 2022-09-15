@@ -28,6 +28,70 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script>
+       let Socket = new WebSocket("ws://127.0.0.1:8000/");
+            
+            Socket.onopen=()=>{
+                console.log("open ...");
+                //Socket.send(JSON.stringify({type: "test", data: "test"}));
+                
+            };
+            Socket.onmessage=(event) => {
+                //console.log("message ", event.data)
+                let data = JSON.parse(event.data);
+                console.log("received message ", data);
+                switch(data['type']){
+                  case "joinGroup":
+                    console.log("join Group");
+              
+                      break;
+                  case "joinRoom":
+                    console.log(data["data"].firstname+" a rejoint le chat !")
+                      break;
+                  case "sendMessage":
+                    
+                    let user = JSON.parse(data['data'].user);
+                    user = user.firstname +" "+user.lastname;
+                    data['data'].user = user;
+                    console.log("data received ", data['data']);
+
+                  const event = new CustomEvent("messageReceived", {
+            
+                      detail: data["data"],
+                      bubbles: true,
+                      cancelable: true,
+                      composed: false,
+                    }); 
+                    window.dispatchEvent(event);
+                    console.log("send message")
+
+
+                      break;
+                  case "joinVideo":
+                      break;  
+                  case "leaveVideo":
+                      break;           
+                  default:
+                    console.log("DEFAULT ", data)
+                      break;
+              }
+                
+              }
+              Socket.onclose=(event) => {
+                console.log(" die");
+              }
+
+
+
+              window.addEventListener("sendMessage", (e)=>{
+                Socket.send(JSON.stringify({type: "sendMessage", data: e.detail}));
+                console.log("socket send ----------------------------------", e.detail);
+              })
+              window.addEventListener("joinRoom", (e)=>{
+                Socket.send(JSON.stringify({type: "joinRoom", data: e.detail}));
+                console.log("join Room ----------------------------------", e.detail);
+              })
+    </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.

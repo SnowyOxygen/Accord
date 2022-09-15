@@ -1,19 +1,68 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { useState } from "react";
+import App from "../App";
+import { PopupContext } from '../App';
 
-function Connection({setHasAccount, setEmail, setPassword}){
+function Connection({setHasAccount}){
     const [tempEmail, setTempEmail] = useState('');
     const [tempPass, setTempPass] = useState('');
+    let [email, setEmail] = useState("");
+    let [pwd, setPassword] = useState("");
+
+
+    let context = useContext(PopupContext);
+    let authContext = context.auth;
+    let stateContext = context.state_;
 
     const [warningsList, setWarningsList] = useState([]);
+
+
+    function getCookie(name) {
+        
+        let r = document.cookie.split(";").map(e=>{let key = e.split("=")[0]; let value = decodeURIComponent(e.split("=")[1]); return {name:key, value:value}});
+        let index = r.findIndex(e=>e.name == name);
+     
+        if(index >-1){
+            return r[index];
+        }else{
+            return false;
+        }
+      }
+
+    useEffect(()=>{
+        if(getCookie("auth")){
+            authContext.setIsAuth(true);
+            console.log("isAuth ", authContext.isAuth);
+        }
+    }, [])
+    useEffect(()=>{
+        setEmail(tempEmail);
+    }, [tempEmail])
+    useEffect(()=>{
+        setPassword(tempPass);
+    }, [tempPass])
 
     const checkDetails = () => {
         
         //TODO: check with backend
 
         if(tempEmail !== "" && tempPass !== ""){
-            setEmail(tempEmail);
-            setPassword(tempPass);
+            console.log("DATA SENT ", email, " ", pwd);
+            fetch(process.env.REACT_APP_SERVER + "/signin.php", {credentials: "include",headers: {'Accept': 'application/json', 'Content-Type':'application/json'},method: 'POST', body: JSON.stringify({email: email, pwd: pwd})})
+            .then(e=>
+                e.json()
+            )
+            .then(e=>{console.log(e);
+                if(e.message == true){
+                    let c = getCookie("infos");
+                    c = c?c:{};
+                    stateContext.setState_({...stateContext.state_, ...c});
+                    console.log("STATE UPDATED ", stateContext.state_);
+                authContext.setIsAuth(true);
+                console.log(authContext.isAuth);
+            }});
+            
+
         }
     } 
 
@@ -54,7 +103,7 @@ function Connection({setHasAccount, setEmail, setPassword}){
     const checkPassword = (e) => { //Check for password structure
         var lWarning = "mot de passe trop court"
 
-        if(e.length >= 8){
+        if(e.length >= 0){
             toggleWarning(lWarning, true);
             setTempPass(e);
         }else{
@@ -74,6 +123,7 @@ function Connection({setHasAccount, setEmail, setPassword}){
                     placeholder="email"
                     required 
                     maxLength="32"/>
+                    {tempEmail}
                 <input
                     id="passwordInput"
                     className="cInput cField"
@@ -82,6 +132,7 @@ function Connection({setHasAccount, setEmail, setPassword}){
                     placeholder="password"
                     required 
                     maxLength="20"/>
+                    {tempPass}
                 <button onClick={() => checkDetails()}>Se connecter</button>
                 {
                     warningsList.length > 0 ? (

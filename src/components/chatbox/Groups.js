@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useContext } from "react";
 import { useState } from "react";
 import {PopupContext} from '../../App';
+import { userDataEvent } from '../../events';
 
-function Groups({setRooms, setRoom, setGroup, group}){
+
+function CreateGroup(){
+    const [groupName, setGroupName] = useState("");
+    const [groupDesc, setGroupDesc] = useState("");
+    return(
+        <div>
+            <label>Nom du groupe</label>
+            <input onChange={(e)=>setGroupName(e.target.value)}/>
+            <label>Description</label>
+            <input onChange={(e)=>setGroupDesc(e.target.value)}/>
+            <button onClick={()=>console.log("hello")} />
+        </div>
+    )
+}
+
+
+function Groups({room, setRooms, setRoom, setGroup, group}){
     const [isOpen, setIsOpen] = useState(false);
+    
+    let context = useContext(PopupContext).auth;
+    let c = useContext(PopupContext);
+
+    
+
+    
+
 
     const groupList = [ //TODO: get groups from backend
         {
@@ -146,6 +171,7 @@ function Groups({setRooms, setRoom, setGroup, group}){
                 // TODO: Check if user chose group
                 ppContext.setppContent(<OpenGroupSetting/>);
                 ppContext.setppDisplay('block');
+                
                 }} className="expand">
                 {`\u2630`}
             </button>
@@ -156,7 +182,10 @@ function Groups({setRooms, setRoom, setGroup, group}){
                         return(
                             <li key={i} className="group-element">
                                 <button
-                                onClick={() => {setRooms(el.rooms);
+                                onClick={() => {
+                                   
+                                    //window.dispatchEvent(userDataEvent({infos: "hello"}));
+                                    setRooms(el.rooms);
                                 setGroup(el);}} 
                                 className="group-button">
                                     {el.lIcon}
@@ -164,7 +193,11 @@ function Groups({setRooms, setRoom, setGroup, group}){
                             </li>
                         );
                     })
+                    
                 }
+                <li className="group-element">
+                  <button className="group-button">+</button>
+                </li>
             </ul>
 
         </div>
