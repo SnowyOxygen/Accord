@@ -1,0 +1,10 @@
+DROP DATABASE mercure;
+CREATE DATABASE mercure;
+USE mercure;
+CREATE TABLE users(
+	email VARCHAR(255) NOT NULL PRIMARY KEY,
+    firstname VARCHAR(255) NOT NULL,
+    lastname VARCHAR(255) NOT NULL,
+    pwd VARCHAR(255) NOT NULL,
+    pwd_recup VARCHAR(255) NOT NULL
+);

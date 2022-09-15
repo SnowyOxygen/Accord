@@ -1,0 +1,7 @@
+USE mercure;
+CREATE TABLE Rooms(
+	id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    descr VARCHAR(255) NOT NULL,
+    id_group INT NOT NULL
+);
